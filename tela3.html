@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunflower - Tutorial</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #FF914D;
+  }
+
+  .dialog-wrapper {
+    position: relative;
+    width: 340px; /* Largura da caixa de diálogo */
+    height: auto; /* Altura da caixa de diálogo ajustável conforme o conteúdo */
+    --balloon-width: 100%; /* Largura da imagem de fundo (balão) */
+    --balloon-height: 100%; /* Altura da imagem de fundo (balão) */
+    background-image: url('imagens/balao.png'); /* Imagem de fundo */
+    background-size: var(--balloon-width) var(--balloon-height); /* Ajusta a imagem para cobrir a caixa */
+    background-position: center; /* Centraliza a imagem */
+    padding: 20px; /* Espaçamento interno para alinhar o conteúdo */
+    display: flex; /* Exibe como flex container */
+    flex-direction: column; /* Alinha o conteúdo verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+  }
+
+  .dialog-box {
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 1; /* Garante que o balão fique à frente da imagem de fundo */
+    flex: 1; /* Ocupa todo o espaço disponível verticalmente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente o conteúdo */
+    align-items: center; /* Centraliza horizontalmente o conteúdo */
+  }
+
+  #dialog-text {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+
+  #next-button {
+    background: #fbca1f; /* Cor de fundo do botão */
+    font-family: inherit; /* Herda a fonte do elemento pai (body) */
+    padding: 0.6em 1.3em; /* Espaçamento interno */
+    font-weight: 900; /* Peso da fonte */
+    font-size: 18px; /* Tamanho da fonte */
+    border: 3px solid black; /* Borda sólida */
+    border-radius: 0.4em; /* Raio da borda */
+    box-shadow: 0.1em 0.1em; /* Sombra */
+    cursor: pointer; /* Cursor de ponteiro ao passar */
+    transition: transform 0.2s, box-shadow 0.2s; /* Transições suaves */
+  }
+
+  #next-button:hover {
+    transform: translate(-0.05em, -0.05em); /* Efeito de deslocamento ao passar o mouse */
+    box-shadow: 0.15em 0.15em; /* Sombra aumentada ao passar o mouse */
+  }
+
+  #next-button:active {
+    transform: translate(0.05em, 0.05em); /* Efeito de deslocamento ao clicar */
+    box-shadow: 0.05em 0.05em; /* Sombra diminuída ao clicar */
+  }
+
+  .imagem-fofo {
+    display: block;
+    margin: 20px auto; /* Centraliza a imagem de "fofo" */
+  }
+</style>
+</head>
+<body>
+
+<div class="dialog-wrapper">
+  <div class="dialog-box">
+    <p id="dialog-text">Clique em "Próximo" para iniciar.</p>
+    <button id="next-button">Próximo</button>
+  </div>
+</div>
+
+<img src="imagens/au au.png" class="imagem-fofo" height="160" width="160">
+
+<script>
+  // Lista de textos para o balão de diálogo
+  const dialogTexts = [
+    "Olá! Meu nome é Rivo",
+    "Estou muito feliz em te conhecer! 🐾 ",
+    "Sou seu amigo e companheiro nesta jornada cheia de descobertas e diversão.",
+    "Vamos aprender juntos sobre coisas incríveis!",
+    "Vamos aprender juntos sobre coisas incríveis!",
+  ];
+
+  // Seleciona elementos do DOM
+  const dialogTextElement = document.getElementById('dialog-text');
+  const nextButton = document.getElementById('next-button');
+
+  // Variável para controlar o índice do texto atual
+  let currentIndex = 0;
+
+  // Função para atualizar o texto do balão de diálogo
+  function updateDialogText() {
+    dialogTextElement.textContent = dialogTexts[currentIndex];
+  }
+
+  // Atualiza o texto inicial
+  updateDialogText();
+
+  // Adiciona evento de clique ao botão "Próximo"
+  nextButton.addEventListener('click', function() {
+    currentIndex = (currentIndex + 1) % dialogTexts.length;
+    updateDialogText();
+  });
+</script>
+
+</body>
+</html>

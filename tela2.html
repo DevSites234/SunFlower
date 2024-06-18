@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunflower - Inicial</title>
+    <img src="imagens/explorar.png" width="280" height="40">
+    <style>
+        body {
+            background-color: #FF914D;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 330px;
+            height: 200px;
+            overflow: hidden;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-images img {
+            width: 330px;
+            height: 200px;
+            border-radius: 20px;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            cursor: pointer;
+            user-select: none;
+            transform: translateY(-50%);
+            border-radius: 50%;
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        button {
+            background: #fbca1f;
+            font-family: inherit;
+            padding: 0.6em 1.3em;
+            font-weight: 900;
+            font-size: 18px;
+            border: 3px solid black;
+            border-radius: 0.4em;
+            box-shadow: 0.1em 0.1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button:hover {
+            transform: translate(-0.05em, -0.05em);
+            box-shadow: 0.15em 0.15em;
+        }
+
+        button:active {
+            transform: translate(0.05em, 0.05em);
+            box-shadow: 0.05em 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel-container">
+        <div class="carousel-images">
+            <img src="imagens/conheça o rivo.png" alt="Conheça o Rivo">
+            <img src="imagens/descobrindo as formas.png" alt="Descobrindo as Formas">
+        </div>
+        <div class="arrow arrow-left">&#9664;</div>
+        <div class="arrow arrow-right">&#9654;</div>
+    </div>
+
+    <button id="redirect-button">Ir</button>
+    <br>
+    <br><br>
+    <br>
+
+    <br>
+    <br>
+    
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="imagens/logo-autismo.png" width="90" height="90">
+
+    <script>
+        const carousel = document.querySelector('.carousel-images');
+        const leftArrow = document.querySelector('.arrow-left');
+        const rightArrow = document.querySelector('.arrow-right');
+        let currentIndex = 0;
+
+        function showImage(index) {
+            const offset = -index * 330;
+            carousel.style.transform = `translateX(${offset}px)`;
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % 2;
+            showImage(currentIndex);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + 2) % 2;
+            showImage(currentIndex);
+        }
+
+        carousel.addEventListener('touchstart', handleTouchStart, false);
+        carousel.addEventListener('touchmove', handleTouchMove, false);
+
+        let xStart = null;
+
+        function handleTouchStart(evt) {
+            const firstTouch = evt.touches[0];
+            xStart = firstTouch.clientX;
+        }
+
+        function handleTouchMove(evt) {
+            if (!xStart) {
+                return;
+            }
+
+            let xEnd = evt.touches[0].clientX;
+            let xDiff = xStart - xEnd;
+
+            if (xDiff > 0) {
+                nextImage();
+            } else {
+                prevImage();
+            }
+
+            xStart = null;
+        }
+
+        leftArrow.addEventListener('click', prevImage);
+        rightArrow.addEventListener('click', nextImage);
+
+        const redirectButton = document.getElementById('redirect-button');
+
+        redirectButton.addEventListener('click', function() {
+            if (currentIndex === 0) {
+                window.location.href = 'tela3.html';
+            } else {
+                window.location.href = 'pagina_descobrindo_as_formas.html';
+            }
+        });
+    </script>
+</body>
+</html>
