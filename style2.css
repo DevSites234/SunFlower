@@ -73,3 +73,22 @@ button:hover::after {
 button:hover .arrowContainer::after {
   transform: translateX(0);
 }
+
+a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+/* Para um link específico */
+.no-blue-link {
+    color: black;
+    text-decoration: none;
+}
+.no-blue-link:hover {
+    color: black;
+    text-decoration: none;
+}
+
